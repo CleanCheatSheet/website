@@ -1,22 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
+:root {
+  /* --bg: linear-gradient(90deg, #163E8C 0%, #59D986 25%, #F2C849 50%, #F26A1B 75%, #D92211 100%); */
+  --bg: hsl(0, 0%, 95%);
+  --nav-bg: hsl(0, 0%, 10%);
+  --nav-bg-accent: hsl(216, 3%, 29%);
+  --nav-size: 3rem;
+}
+
 body {
   padding: 0;
   margin: 0;
-  background: hsl(0, 0%, 90%);
+  background: var(--bg);
   font-family: "Noto Sans", Ubuntu, Cantarell, Fira Sans, Droid Sans,
     Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-:root {
-  /* --bg: linear-gradient(90deg, #163E8C 0%, #59D986 25%, #F2C849 50%, #F26A1B 75%, #D92211 100%); */
-  --bg: hsl(0, 0%, 10%);
-  --bg-accent: #484a4d;
-  --text-color: hsl(0, 0%, 90%);
-  --nav-size: 3rem;
 }
 
 ul {
@@ -26,37 +26,6 @@ ul {
 }
 
 a {
-  color: var(--text-color);
+  color: black;
   text-decoration: none;
-}
-
-img {
-  width: 100%;
-  max-width: 26rem;
-}
-
-.card {
-  background: hsl(0, 0%, 100%);
-  /* background: hsl(197, 100%, 95%); */
-  color: hsl(0, 0%, 0%);
-  overflow: hidden;
-  padding: 10px;
-}
-
-.card:first-child {
-  background: hsl(197, 100%, 20%);
-  color: hsl(0, 0%, 100%);
-}
-
-/* .card:nth-child(2n) {
-    background: hsl(197, 100%, 90%);
-} */
-
-.basic-grid {
-  display: grid;
-  gap: 5px;
-  grid-template-columns: repeat(auto-fill, 26rem);
-  grid-auto-rows: 37rem;
-  justify-content: space-between;
-  padding: 2rem 2rem 2rem 2rem;
 }

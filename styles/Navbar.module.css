@@ -3,8 +3,7 @@
 /* <nav> */
 .navbar {
   height: var(--nav-size);
-  background: var(--bg);
-  /* background: blue; */
+  background: var(--nav-bg);
   padding: 1rem 1rem;
   border-bottom: var(--border);
   display: flex;
@@ -21,19 +20,9 @@
   align-items: center;
 }
 
-/* <li> */
-.nav-item {
-  /* display: flex;
-  align-items: flex-start;
-  justify-content: center; */
-}
-
 /* Icon Button */
 .icon-button {
-  /* --button-size: calc(var(--nav-size) * 0.5); */
-  /* width: var(--button-size); */
-  /* height: var(--button-size);  */
-  background-color: #484a4d;
+  background-color: var(--nav-bg-accent);
   border-radius: 5px;
   padding: 5px 10px;
   margin: 5px;
@@ -47,6 +36,7 @@
 
 .logo {
     background: transparent;
+    color: white;
     font-family: 'Pacifico', cursive;
     font-size: 2.5rem;
 }
