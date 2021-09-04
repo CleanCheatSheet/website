@@ -2,11 +2,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
 :root {
-  /* --bg: linear-gradient(90deg, #163E8C 0%, #59D986 25%, #F2C849 50%, #F26A1B 75%, #D92211 100%); */
-  --bg: hsl(0, 0%, 95%);
-  --nav-bg: hsl(0, 0%, 10%);
-  --nav-bg-accent: hsl(216, 3%, 29%);
-  --nav-size: 3rem;
+  /* --bg: hsl(0, 0%, 95%);
+  --nav-bg: linear-gradient(90deg, hsl(39, 96%, 48%) 0%, hsl(33, 96%, 43%) 100%);
+  --nav-bg-accent: hsl(0, 0%, 95%);
+  --nav-size: 4.5rem;
+  --icone-color: hsl(33, 96%, 35%);
+  --logo-color: hsl(0, 0%, 95%);
+  --logo-font-size: calc(var(--nav-size) / 2); */
+  /* --bg: linear-gradient(90deg, hsl(39, 96%, 48%) 0%, hsl(33, 96%, 43%) 100%); */
+  --bg: linear-gradient(90deg, hsl(191, 64%, 40%) 0%, hsl(200, 64%, 43%) 100%);
+  --nav-bg: hsl(0, 0%, 90%);
+  --nav-bg-accent: hsl(0, 0%, 20%);
+  --nav-size: 4.5rem;
+  --icone-color: hsl(0, 0%, 90%);
+  --logo-color: hsl(0, 0%, 20%);
+  --logo-font-size: calc(var(--nav-size) / 2);
 }
 
 body {

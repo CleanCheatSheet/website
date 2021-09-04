@@ -13,7 +13,7 @@ export function NavItem(props) {
   const [open, setOpen] = useState(false);
 
   return (
-    <li className="nav-item">
+    <li className={styles["nav-item"]}>
       <a href={props.link} className={styles["icon-button"] + " " + styles[props.css]} onClick={() => setOpen(!open)}>
         {props.content}
       </a>

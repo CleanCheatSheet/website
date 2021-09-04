@@ -2,13 +2,18 @@
 
 /* <nav> */
 .navbar {
+  margin: auto;
   height: var(--nav-size);
+  width: 90%;
   background: var(--nav-bg);
-  padding: 1rem 1rem;
+  border-radius: var(--nav-size);
+  padding-left: calc(var(--nav-size) / 8);
+  padding-right: calc(var(--nav-size) / 8);
   border-bottom: var(--border);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 1.5rem;
 }
 
 /* <ul> */
@@ -18,14 +23,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
+}
+
+/* <li> */
+.nav-item {
+  height: calc(var(--nav-size) - calc(var(--nav-size) / 4));
 }
 
 /* Icon Button */
 .icon-button {
+  display:inline-flex;
   background-color: var(--nav-bg-accent);
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin: 5px;
+  border-radius: var(--nav-size);
+  height: 100%;
+  width: 6rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--icone-color);
   transition: filter 300ms;
 }
 
@@ -36,7 +51,7 @@
 
 .logo {
     background: transparent;
-    color: white;
+    color: var(--logo-color);
     font-family: 'Pacifico', cursive;
-    font-size: 2.5rem;
+    font-size: var(--logo-font-size);
 }
