@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Search from '../components/search'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <br></br>
         <br></br>
         <h1><center>Welcome to Clean Cheat Sheet!</center></h1>
+        {/* <Search /> */}
       </main>
     </div>
   );
