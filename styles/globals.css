@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
 
 :root {
   /* --bg: hsl(0, 0%, 95%);
@@ -26,6 +29,12 @@
   --logo-font-size: calc(var(--nav-size) / 2);
   --footer-size: 2.5rem;
 
+  --tab-width: 20rem;
+  --tab-height: 5rem;
+  --double-tab-height: 10rem;
+  --inside-tab-width: 19.5rem;
+  --inside-tab-height: 4.5rem;
+  --tab-border-radius:1.5rem;
  
 }
 
@@ -34,7 +43,7 @@ body {
   margin: 0;
   background: var(--bg);
   font-family: "Noto Sans", Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
+    Helvetica Neue, 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -48,4 +57,15 @@ ul {
 a {
   color: black;
   text-decoration: none;
+}
+
+.title {
+  margin: 2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size:xx-large;
+
+}
+
+p{
+  font-family: "Raleway", sans-serif;
 }

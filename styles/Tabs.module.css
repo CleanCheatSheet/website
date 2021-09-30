@@ -1,0 +1,66 @@
+.tabs {
+    margin-top: 5rem;
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: var(--tab-width);
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+    border-radius: var(--tab-border-radius);
+  }
+  
+  .tabs input {
+      display: none;
+  }
+  
+  .tabs > input:checked + label {
+      transition: all 1s ease-out;
+      color: var(--primary);
+      box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
+      border-radius: var(--tab-border-radius);
+      height: var(--inside-tab-height);
+      width: var(--inside-tab-width);
+      margin: 0.25rem;
+  }
+  
+  .tabsone, .tabstwo, .tabsthree {
+      width: var(--tab-width);
+      height: var(--tab-height);
+      font-size: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      color: var(--greyDark);
+      transition: all .5s ease;
+    /* border: solid red; */
+  }
+  
+  .tabsone:hover, .tabstwo:hover, .tabsthree:hover {
+      color: var(--primary);
+  }
+/*   
+  .tabsselected {
+      position: absolute;
+      height: var(--inside-tab-height);
+      width: var(--inside-tab-width);
+      margin: 0.25rem;
+      border-radius: var(--tab-border-radius);
+      box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
+      pointer-events: none;
+  } */
+/* 
+  .tabs-1:checked ~ .tabsselected {
+      transform: translateY(0);
+      transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  
+  #tabs-2:checked ~ .tabsselected {
+      transform: translateY(5rem);
+      transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  
+  #tabs-3:checked ~ .tabsselected {
+      transform: translateY(5em);
+      transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  } */
