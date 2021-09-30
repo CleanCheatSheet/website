@@ -10,13 +10,23 @@
   --logo-color: hsl(0, 0%, 95%);
   --logo-font-size: calc(var(--nav-size) / 2); */
   /* --bg: linear-gradient(90deg, hsl(39, 96%, 48%) 0%, hsl(33, 96%, 43%) 100%); */
-  --bg: linear-gradient(90deg, hsl(191, 64%, 40%) 0%, hsl(200, 64%, 43%) 100%);
+  /* --bg: linear-gradient(90deg, hsl(191, 64%, 40%) 0%, hsl(200, 64%, 43%) 100%); */
+  --bg: #FFFFFF;  ;
+  --white: #FFFFFF;
+  --greyLight-1: #E4EBF5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+
   --nav-bg: hsl(0, 0%, 90%);
   --nav-bg-accent: hsl(0, 0%, 20%);
   --nav-size: 4.5rem;
   --icone-color: hsl(0, 0%, 90%);
   --logo-color: hsl(0, 0%, 20%);
   --logo-font-size: calc(var(--nav-size) / 2);
+  --footer-size: 2.5rem;
+
+ 
 }
 
 body {
