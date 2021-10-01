@@ -10,7 +10,8 @@
   --logo-color: hsl(0, 0%, 95%);
   --logo-font-size: calc(var(--nav-size) / 2); */
   /* --bg: linear-gradient(90deg, hsl(39, 96%, 48%) 0%, hsl(33, 96%, 43%) 100%); */
-  --bg: linear-gradient(90deg, hsl(191, 64%, 40%) 0%, hsl(200, 64%, 43%) 100%);
+  /* --bg: linear-gradient(90deg, hsl(191, 64%, 40%) 0%, hsl(200, 64%, 43%) 100%); */
+  --bg: hsl(0,0,90%);
   --nav-bg: hsl(0, 0%, 90%);
   --nav-bg-accent: hsl(0, 0%, 20%);
   --nav-size: 4.5rem;
