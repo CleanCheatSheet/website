@@ -14,7 +14,7 @@
   --logo-font-size: calc(var(--nav-size) / 2); */
   /* --bg: linear-gradient(90deg, hsl(39, 96%, 48%) 0%, hsl(33, 96%, 43%) 100%); */
   /* --bg: linear-gradient(90deg, hsl(191, 64%, 40%) 0%, hsl(200, 64%, 43%) 100%); */
-  --bg: #FFFFFF;  ;
+  --bg: #E4EBF5;
   --white: #FFFFFF;
   --greyLight-1: #E4EBF5;
   --greyLight-2: #c8d0e7;
@@ -35,7 +35,7 @@
   --triple-tab-height: 15rem;
   --inside-tab-width: 19.5rem;
   --inside-tab-height: 4.5rem;
-  --tab-border-radius:1.5rem;
+  --tab-border-radius:2rem;
  
 }
 
@@ -61,12 +61,13 @@ a {
 }
 
 .title {
-  margin: 2rem;
+  margin: 1rem;
   font-family: 'DM Sans', sans-serif;
   font-size:xx-large;
 
 }
 
 p{
+  margin: 1rem;
   font-family: "Raleway", sans-serif;
 }
