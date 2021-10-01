@@ -2,35 +2,45 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import styles from "../styles/Search.module.css";
 
+function getCorrectResultIndex(index, length) {
+  if (index === -1) {
+    return length;
+  }
+  return index;
+}
+
 export function Search() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [activeResultIndex, setActiveResultIndex] = useState(0);
+  const [isEnterDown, setIsEnterDown] = useState(false);
   const inputRef = useRef(null);
   const resultsRef = useRef(null);
+  const wrapperRef = useRef(null);
 
   const searchEndpoint = (query) => `/api/search?q=${query}`;
   function updateResults(query) {
-    if (query !== "") {
-      fetch(searchEndpoint(query))
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res);
-          setResults(res.results);
-        });
-    } else {
-      setResults([]);
-    }
+    // if (query !== "") {
+    fetch(searchEndpoint(query))
+      .then((res) => res.json())
+      .then((res) => {
+        setResults(res.results);
+      });
+    // } else {
+    // setResults([]);
+    // }
   }
 
   const hasResults = results && results.length > 0;
 
   useEffect(() => {
-    console.log("activeResultIndex::", activeResultIndex);
     if (hasResults) {
+      const resultsItems = Array.from(resultsRef.current.children);
       if (activeResultIndex == 0) {
+        resultsItems.map((item) =>
+          item.lastChild.classList.remove(styles.hover)
+        );
       } else {
-        const resultsItems = Array.from(resultsRef.current.children);
         resultsItems.map((item, index) => {
           if (index === activeResultIndex - 1) {
             item.lastChild.classList.add(styles.hover);
@@ -43,10 +53,25 @@ export function Search() {
   }, [activeResultIndex]);
 
   useEffect(() => {
-    console.log("Strange effect!!");
+    if (isEnterDown) {
+      if (activeResultIndex === 0) {
+        console.log("Should redirect to seach page");
+      } else {
+        const resultsItems = Array.from(resultsRef.current.children);
+        resultsItems[activeResultIndex - 1].lastChild.click();
+      }
+      setQuery("");
+      setResults([]);
+      setIsEnterDown(false);
+      document.activeElement.blur();
+    }
+    return () => {
+      setIsEnterDown(false);
+    };
+  }, [isEnterDown]);
 
+  useEffect(() => {
     if (hasResults) {
-      console.log("Strange effect and I am in");
       document.body.addEventListener("keydown", onKeyDown);
     } else {
       document.body.removeEventListener("keydown", onKeyDown);
@@ -55,6 +80,18 @@ export function Search() {
       document.body.removeEventListener("keydown", onKeyDown);
     };
   }, [hasResults]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setResults([]);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
 
   function onKeyDown(event) {
     const isUp = event.key === "ArrowUp";
@@ -65,26 +102,24 @@ export function Search() {
 
     if (isUp) {
       setActiveResultIndex((prevActiveResultIndex) =>
-        Math.abs((prevActiveResultIndex - 1) % (resultsItems.length + 1))
+        getCorrectResultIndex(
+          (prevActiveResultIndex - 1) % (resultsItems.length + 1),
+          resultsItems.length
+        )
       );
     }
 
     if (isDown) {
       setActiveResultIndex((prevActiveResultIndex) =>
-        Math.abs((prevActiveResultIndex + 1) % (resultsItems.length + 1))
+        getCorrectResultIndex(
+          (prevActiveResultIndex + 1) % (resultsItems.length + 1),
+          resultsItems.length
+        )
       );
     }
 
     if (isEnter) {
-      if (activeResultIndex === 0) {
-        console.log("Should redirect to seach page");
-      } else {
-        console.log(
-          "activeResultIndex:: ",
-          resultsItems[activeResultIndex - 1].lastChild
-        );
-        resultsItems[activeResultIndex - 1].lastChild.click();
-      }
+      setIsEnterDown(true);
     }
   }
 
@@ -98,13 +133,9 @@ export function Search() {
     updateResults(query);
   }
 
-  function handleOnBlur() {
-    setResults([]);
-  }
-
   return (
     <div className={styles.module}>
-      <div className={styles.container}>
+      <div ref={wrapperRef} className={styles.container}>
         <input
           className={styles.search}
           placeholder="Search sheets"
@@ -112,17 +143,24 @@ export function Search() {
           value={query}
           onChange={handleOnChange}
           onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
           ref={inputRef}
         />
-        <p>{activeResultIndex}</p>
         {hasResults && (
           <ul ref={resultsRef} className={styles.results}>
             {results.map(({ title }) => {
               return (
                 <li key={title} className={styles.result}>
-                  <Link href="/[title]" as={`/${title}`}>
-                    <a className={styles.link}>{title}</a>
+                  <Link href={`/${title}`} as={`/${title}`}>
+                    <a
+                      onClick={() => {
+                        setQuery("");
+                        setResults([]);
+                        document.activeElement.blur();
+                      }}
+                      className={styles.link}
+                    >
+                      {title}
+                    </a>
                   </Link>
                 </li>
               );

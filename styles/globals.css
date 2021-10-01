@@ -17,14 +17,14 @@
   --greyLight-2: #c8d0e7;
   --greyLight-3: #bec8e4;
   --greyDark: #9baacf;
-
   --nav-bg: hsl(0, 0%, 90%);
-  --nav-bg-accent: hsl(0, 0%, 20%);
+  --nav-bg-accent: hsl(0, 0%, 90%);
   --nav-size: 4.5rem;
   --icone-color: hsl(0, 0%, 90%);
   --logo-color: hsl(0, 0%, 20%);
   --logo-font-size: calc(var(--nav-size) / 2);
   --footer-size: 2.5rem;
+  --radius: 10px;
 }
 
 body {
