@@ -21,19 +21,22 @@
 }
 
 .icon{
-    padding: 0.45%;
+    /* padding: 0.45%; */
+	/* margin-right: 0.1rem;*/
+	margin-right: 0.5rem;
+	margin-top: 0.3rem;
 }
 
 .text{
-	margin: auto;
-	padding-top: 0.45%;
-	padding-left: 3%;
+	margin-left: 1.5rem;
+	margin-top: 0.6rem;
 	font-family: 'Raleway', sans-serif;
 	color: black;
 }
 
 .links{
-	width: 20%;
+	width: 30%;
 	display: flex; 
-	justify-content: stretch;
+	justify-content: left;
+	/* border: solid; */
 }

@@ -29,9 +29,10 @@
   --logo-font-size: calc(var(--nav-size) / 2);
   --footer-size: 2.5rem;
 
-  --tab-width: 20rem;
+  --tab-width: 15rem;
   --tab-height: 5rem;
   --double-tab-height: 10rem;
+  --triple-tab-height: 15rem;
   --inside-tab-width: 19.5rem;
   --inside-tab-height: 4.5rem;
   --tab-border-radius:1.5rem;
