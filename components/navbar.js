@@ -1,27 +1,29 @@
 import styles from "../styles/Navbar.module.css";
-import Search from "./search"
-import React, { useState} from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
 
-export function Navbar(props) {
+export function Navbar() {
   return (
     <nav className={styles.navbar}>
-      <NavItem content="CCS" link="/" css="logo"/>
-      <Search />
-      <ul className={styles['navbar-nav']}>{props.children}</ul>
+      <Logo />
     </nav>
   );
 }
 
-export function NavItem(props) {
-  const [open, setOpen] = useState(false);
-
+function Logo() {
   return (
-    <li className={styles["nav-item"]}>
-      <a href={props.link} className={styles["icon-button"] + " " + styles[props.css]} onClick={() => setOpen(!open)}>
-        {props.content}
-      </a>
-
-      {open && props.children}
-    </li>
+    <div className={styles.logo}>
+      <Link href="/">
+        <a>
+          <Image
+            src="/logo-ccs.svg"
+            alt="CleanCheatSheet Logo"
+            width="64"
+            height="64"
+          />
+        </a>
+      </Link>
+    </div>
   );
 }

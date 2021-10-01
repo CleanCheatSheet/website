@@ -1,63 +1,135 @@
-import { useCallback, useRef, useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import styles from "../styles/Search.module.css";
 
-export default function Search() {
-  const searchRef = useRef(null);
+export function Search() {
   const [query, setQuery] = useState("");
-  const [active, setActive] = useState(false);
   const [results, setResults] = useState([]);
+  const [activeResultIndex, setActiveResultIndex] = useState(0);
+  const inputRef = useRef(null);
+  const resultsRef = useRef(null);
 
   const searchEndpoint = (query) => `/api/search?q=${query}`;
-
-  const onChange = useCallback((event) => {
-    const query = event.target.value;
-    setQuery(query);
-    if (query.length) {
+  function updateResults(query) {
+    if (query !== "") {
       fetch(searchEndpoint(query))
         .then((res) => res.json())
         .then((res) => {
+          console.log(res);
           setResults(res.results);
         });
     } else {
       setResults([]);
     }
-  }, []);
+  }
 
-  const onFocus = useCallback(() => {
-    setActive(true);
-    window.addEventListener("click", onClick);
-  }, []);
+  const hasResults = results && results.length > 0;
 
-  const onClick = useCallback((event) => {
-    if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setActive(false);
-      setQuery("");
-      window.removeEventListener("click", onClick);
+  useEffect(() => {
+    console.log("activeResultIndex::", activeResultIndex);
+    if (hasResults) {
+      if (activeResultIndex == 0) {
+      } else {
+        const resultsItems = Array.from(resultsRef.current.children);
+        resultsItems.map((item, index) => {
+          if (index === activeResultIndex - 1) {
+            item.lastChild.classList.add(styles.hover);
+          } else {
+            item.lastChild.classList.remove(styles.hover);
+          }
+        });
+      }
     }
-  }, []);
+  }, [activeResultIndex]);
+
+  useEffect(() => {
+    console.log("Strange effect!!");
+
+    if (hasResults) {
+      console.log("Strange effect and I am in");
+      document.body.addEventListener("keydown", onKeyDown);
+    } else {
+      document.body.removeEventListener("keydown", onKeyDown);
+    }
+    return () => {
+      document.body.removeEventListener("keydown", onKeyDown);
+    };
+  }, [hasResults]);
+
+  function onKeyDown(event) {
+    const isUp = event.key === "ArrowUp";
+    const isDown = event.key === "ArrowDown";
+    const isEnter = event.key === "Enter";
+
+    const resultsItems = Array.from(resultsRef.current.children);
+
+    if (isUp) {
+      setActiveResultIndex((prevActiveResultIndex) =>
+        Math.abs((prevActiveResultIndex - 1) % (resultsItems.length + 1))
+      );
+    }
+
+    if (isDown) {
+      setActiveResultIndex((prevActiveResultIndex) =>
+        Math.abs((prevActiveResultIndex + 1) % (resultsItems.length + 1))
+      );
+    }
+
+    if (isEnter) {
+      if (activeResultIndex === 0) {
+        console.log("Should redirect to seach page");
+      } else {
+        console.log(
+          "activeResultIndex:: ",
+          resultsItems[activeResultIndex - 1].lastChild
+        );
+        resultsItems[activeResultIndex - 1].lastChild.click();
+      }
+    }
+  }
+
+  function handleOnChange(event) {
+    const query = event.target.value;
+    setQuery(query);
+    updateResults(query);
+  }
+
+  function handleOnFocus() {
+    updateResults(query);
+  }
+
+  function handleOnBlur() {
+    setResults([]);
+  }
 
   return (
-    <div className={styles.container} ref={searchRef}>
-      <input
-        className={styles.search}
-        onChange={onChange}
-        onFocus={onFocus}
-        placeholder="Search sheets"
-        type="text"
-        value={query}
-      />
-      {active && results.length > 0 && (
-        <ul className={styles.results}>
-          {results.map(({ title }) => (
-            <li className={styles.result} key={title}>
-              <Link href="/[title]" as={`/${title}`}>
-                <a className={styles.link}>{title}</a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className={styles.module}>
+      <div className={styles.container}>
+        <input
+          className={styles.search}
+          placeholder="Search sheets"
+          type="text"
+          value={query}
+          onChange={handleOnChange}
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
+          ref={inputRef}
+        />
+        <p>{activeResultIndex}</p>
+        {hasResults && (
+          <ul ref={resultsRef} className={styles.results}>
+            {results.map(({ title }) => {
+              return (
+                <li key={title} className={styles.result}>
+                  <Link href="/[title]" as={`/${title}`}>
+                    <a className={styles.link}>{title}</a>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
