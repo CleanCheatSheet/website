@@ -1,5 +1,8 @@
 import Head from "next/head";
-import Search from "../components/search";
+import { Headline } from "../components/headline";
+import { CardMosaic } from "../components/card";
+import { PlaceholderLeft, PlaceholderRight } from "../components/placeholder";
+import { Triptych } from "../components/triptych";
 
 export default function Home() {
   return (
@@ -10,23 +13,93 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <br></br>
-        <br></br>
-        <br></br>
-        <h1>
-          <center>Welcome to Clean Cheat Sheet!</center>
-        </h1>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-      </main>
+      <Headline
+        title="Stop searching the same thing on Google 10 times a day."
+        subtitle="Use sheets made by the community or create yours and never loose time again to find a single command"
+      />
+      <CardMosaic
+        displayText={true}
+        title="Discover the CleanCheatSheets"
+        text="Use sheets made by the community or create yours and never loose time again to find a single command."
+        cards={[
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+          {
+            link: "/markdown",
+            title: "Markdown",
+            description:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.",
+            src: "/markdown.png",
+          },
+        ]}
+      />
+      <PlaceholderLeft
+        title="Create your own sheet"
+        text="Use sheets made by the community or create yours and never loose time again to find a single command"
+        src="/image-placeholder.png"
+        alt="Image placeholder"
+      />
+      <PlaceholderRight
+        title="Create your own sheet"
+        text="Use sheets made by the community or create yours and never loose time again to find a single command"
+        src="/image-placeholder.png"
+        alt="Image placeholder"
+      />
+      <Triptych />
     </div>
   );
 }

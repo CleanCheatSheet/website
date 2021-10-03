@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
       <Navbar />
       <Search />
       <Component {...pageProps} />
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

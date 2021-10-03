@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (min-width: 60rem) {
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    padding-left: auto;
+    padding-right: auto;
+    justify-content: center;
+    align-items: stretch;
+  }
+}
+
+.panel {
+  background: var(--greyLight-0);
+  box-shadow: var(--box-shadow);
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  max-width: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.panel * {
+  margin: 1rem;
+}
+
+.text {
+  max-width: 40rem;
+  font-size: large;
+  text-align: center;
+}
