@@ -45,6 +45,11 @@
   overflow: hidden;
 }
 
+.container:hover {
+  filter: var(--filter-hover);
+  box-shadow: var(--box-shadow-hover);
+}
+
 .icon {
   min-width: 4rem;
   max-width: 6rem;

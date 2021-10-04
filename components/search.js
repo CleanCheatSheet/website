@@ -136,6 +136,9 @@ export function Search() {
   return (
     <div className={styles.module}>
       <div ref={wrapperRef} className={styles.container}>
+        <div className={styles.logoUpWrapper}>
+          <div className={styles.logoUp}></div>
+        </div>
         <input
           className={styles.search}
           placeholder="Search sheets"
@@ -159,7 +162,7 @@ export function Search() {
                       }}
                       className={styles.link}
                     >
-                      {title}
+                      <p>{title}</p>
                     </a>
                   </Link>
                 </li>

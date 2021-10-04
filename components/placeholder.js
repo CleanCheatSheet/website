@@ -1,6 +1,8 @@
 import styles from "../styles/Placeholder.module.css";
 import Image from "next/image";
 
+import { Button } from "./button";
+
 export function PlaceholderLeft(props) {
   return (
     <div className={`${styles.container} ${styles.background}`}>
@@ -16,6 +18,12 @@ export function PlaceholderLeft(props) {
         <div className={styles.text}>
           <p>{props.text}</p>
         </div>
+        <Button
+          angle={props.buttonAngle}
+          color={false}
+          text={props.buttonText}
+          link={props.link}
+        />
       </div>
     </div>
   );
@@ -31,6 +39,12 @@ export function PlaceholderRight(props) {
         <div className={styles.text}>
           <p>{props.text}</p>
         </div>
+        <Button
+          angle={props.buttonAngle}
+          color={false}
+          text={props.buttonText}
+          link={props.link}
+        />
       </div>
       <div className={styles.imageWrapper}>
         <div className={styles.image}>

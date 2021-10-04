@@ -92,14 +92,24 @@ export default function Home() {
         text="Use sheets made by the community or create yours and never loose time again to find a single command"
         src="/image-placeholder.png"
         alt="Image placeholder"
+        buttonAngle="bottomRight"
+        buttonText="Learn More"
+        link="/about"
       />
       <PlaceholderRight
         title="Create your own sheet"
         text="Use sheets made by the community or create yours and never loose time again to find a single command"
         src="/image-placeholder.png"
         alt="Image placeholder"
+        buttonAngle="topLeft"
+        buttonText="Learn More"
+        link="/about"
       />
-      <Triptych />
+      <Triptych
+        buttonAngle="bottomRight"
+        buttonText="Learn More"
+        link="/about"
+      />
     </div>
   );
 }

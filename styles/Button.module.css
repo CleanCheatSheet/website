@@ -1,0 +1,44 @@
+.container {
+  width: 10rem;
+  height: 3rem;
+  background: var(--greyLight-0);
+  box-shadow: var(--box-shadow);
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes background-animation {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+.color {
+  background-image: var(--gradient);
+  background-size: calc(4 * var(--background-zoom));
+  animation: background-animation var(--background-duration) infinite alternate;
+}
+
+.topLeft {
+  border-top-left-radius: 0;
+}
+
+.bottomRight {
+  border-bottom-right-radius: 0;
+}
+
+.container:hover {
+  filter: var(--filter-hover);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.text {
+  max-width: 40rem;
+  font-size: large;
+  text-align: center;
+}

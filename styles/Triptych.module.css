@@ -31,6 +31,10 @@
   margin: 1rem;
 }
 
+.button {
+  margin-top: auto;
+}
+
 .text {
   max-width: 40rem;
   font-size: large;
