@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Search.module.css";
 
@@ -135,6 +136,14 @@ export function Search() {
 
   return (
     <div className={styles.module}>
+      <div className={styles.logoBackground}>
+        <Image
+          alt="Logo background"
+          src="/logo-ccs-bg.png"
+          layout="fill"
+          className="logoBackground"
+        />
+      </div>
       <div ref={wrapperRef} className={styles.container}>
         <div className={styles.logoUpWrapper}>
           <div className={styles.logoUp}></div>

@@ -7,12 +7,20 @@
   margin-bottom: 4rem;
 }
 
+.logoBackground {
+  width: 9rem;
+  height: 9rem;
+  position: absolute;
+  overflow: hidden;
+  z-index: -1;
+}
+
 .container {
-  background-image: var(--gradient);
-  background-size: var(--background-zoom);
-  animation: background-animation var(--background-duration) infinite alternate;
-  border-top-right-radius: 2.5rem;
-  border-bottom-left-radius: 2.5rem;
+  /* background-image: var(--gradient); */
+  /* background-size: var(--background-zoom); */
+  /* animation: background-animation var(--background-duration) infinite alternate; */
+  /* border-top-right-radius: 2.5rem; */
+  /* border-bottom-left-radius: 2.5rem; */
   padding: 1.25rem;
 }
 
