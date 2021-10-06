@@ -15,10 +15,6 @@ export default function Sheet({ readme, sheet }) {
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css"
         />
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-        <script>document.documentElement.style.setProperty('--bg', '{sheet.data.firstColor}');</script>
-        <script>document.documentElement.style.setProperty('--second-background-color', 'hsl(0, 0%, 90%)');</script>
-        {/* <script>document.documentElement.style.setProperty('--nav-bg', '{sheet.data.firstColor}');</script> */}
-        {/* <script>document.documentElement.style.setProperty('--nav-bg-accent', '{sheet.data.secondColor}');</script> */}
       </Head>
       <style jsx>{css}</style>
       <main>

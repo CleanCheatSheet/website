@@ -1,40 +1,89 @@
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 :root {
-  /* --bg: hsl(0, 0%, 95%);
-  --nav-bg: linear-gradient(90deg, hsl(39, 96%, 48%) 0%, hsl(33, 96%, 43%) 100%);
-  --nav-bg-accent: hsl(0, 0%, 95%);
-  --nav-size: 4.5rem;
-  --icone-color: hsl(33, 96%, 35%);
-  --logo-color: hsl(0, 0%, 95%);
-  --logo-font-size: calc(var(--nav-size) / 2); */
-  /* --bg: linear-gradient(90deg, hsl(39, 96%, 48%) 0%, hsl(33, 96%, 43%) 100%); */
-  /* --bg: linear-gradient(90deg, hsl(191, 64%, 40%) 0%, hsl(200, 64%, 43%) 100%); */
-  --bg: #ffffff;
-  --white: #ffffff;
-  --greyLight-1: #e4ebf5;
-  --greyLight-2: #c8d0e7;
-  --greyLight-3: #bec8e4;
-  --greyDark: #9baacf;
-  --nav-bg: hsl(0, 0%, 90%);
-  --nav-bg-accent: hsl(0, 0%, 90%);
-  --nav-size: 4.5rem;
-  --icone-color: hsl(0, 0%, 90%);
-  --logo-color: hsl(0, 0%, 20%);
-  --logo-font-size: calc(var(--nav-size) / 2);
-  --footer-size: 2.5rem;
-  --radius: 10px;
+  --lightness: 70%;
+  --saturation: 90%;
+  --red: hsl(13, var(--saturation), var(--lightness));
+  --orange: hsl(37, var(--saturation), var(--lightness));
+  --yellow: hsl(55, var(--saturation), var(--lightness));
+  --green: hsl(136, var(--saturation), var(--lightness));
+  --blue: hsl(224, var(--saturation), var(--lightness));
+  --purple: hsl(289, var(--saturation), var(--lightness));
+  --gradient: linear-gradient(
+    45deg,
+    var(--red),
+    var(--orange),
+    var(--yellow),
+    var(--green),
+    var(--blue),
+    var(--purple)
+  );
+  --background-zoom: 500%;
+  --background-duration: 120s;
+  --white: hsl(0, 0%, 100%, 90%);
+  --greyLight-0: hsl(0, 0%, 90%, 90%);
+  --greyLight-1: hsl(215, 46%, 93%, 90%);
+  --greyLight-2: hsl(225, 39%, 85%, 90%);
+  --greyLight-3: hsl(224, 41%, 82%, 90%);
+  --greyDark: hsl(223, 35%, 71%, 90%);
+  /* --box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2),
+    inset -0.2rem -0.2rem 0.5rem var(--white); */
+  --box-shadow: hsla(240, 5%, 41%, 0.2) 0px 7px 29px 0px;
+  /* --box-shadow-hover: hsla(240, 5%, 41%, 0.2) 0px 5px 15px 0px; */
+  --box-shadow-hover: rgba(0, 0, 0, 0.16) 0px 1px 4px,
+    rgb(51, 51, 51) 0px 0px 0px 3px;
+  --filter-hover: brightness(1.1);
 }
 
 body {
   padding: 0;
   margin: 0;
-  background: var(--bg);
-  font-family: "Noto Sans", Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-image: var(--gradient);
+  background-size: var(--background-zoom);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  animation: background-animation var(--background-duration) infinite alternate;
+  /* font-family: "Noto Sans", Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+  font-family: Poppins, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji;
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
+}
+
+@keyframes background-animation {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+h1 {
+  font-size: 3.5rem;
+  line-height: 0.9;
+  font-weight: 700;
+  margin: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 400;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 600;
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
 }
 
 ul {
