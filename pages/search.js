@@ -3,8 +3,7 @@ import Head from "next/head";
 import styles from "../styles/SearchPage.module.css";
 import stylesSearch from "../styles/Search.module.css";
 import Router from "next/router";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CardMosaic } from "../components/card";
 
