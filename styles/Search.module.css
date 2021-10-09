@@ -1,73 +1,32 @@
 .module {
   width: 100%;
-  height: 9rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-}
-
-.container {
-  background-image: var(--gradient);
-  background-size: var(--background-zoom);
-  animation: background-animation var(--background-duration) infinite alternate;
-  border-top-right-radius: 2.5rem;
-  border-bottom-left-radius: 2.5rem;
-  padding: 1.25rem;
-}
-
-@keyframes background-animation {
-  0% {
-    background-position: right;
-  }
-  100% {
-    background-position: left;
-  }
-}
-
-.logoUpWrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.logoUp {
-  height: 3rem;
-  width: 6.5rem;
-  background: var(--greyLight-0);
-  box-shadow: var(--box-shadow);
-  border-radius: 2rem;
-  border-top-left-radius: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .search {
   font-family: inherit;
   height: 3rem;
-  width: 5.5rem;
+  width: 20rem;
   padding: 0;
   padding-left: 1rem;
-  color: transparent;
+  /* color: transparent; */
   background: var(--greyLight-0);
   box-shadow: var(--box-shadow);
   border-radius: 2rem;
   border-bottom-right-radius: 0;
   border: hidden;
-  transition: all 0.2s ease-in-out;
+  outline: none;
 }
 
 .search:hover {
-  box-shadow: var(--box-shadow);
-  color: initial;
-  width: 20rem;
+  /* filter: var(--filter-hover); */
+  box-shadow: var(--box-shadow-hover);
 }
 
 .search:focus {
-  box-shadow: var(--box-shadow);
-  color: initial;
-  width: 20rem;
-  outline: none;
   box-shadow: var(--box-shadow-hover);
 }
 
@@ -104,4 +63,13 @@
 
 .hover {
   filter: brightness(0.9);
+}
+
+@keyframes background-animation {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
 }

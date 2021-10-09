@@ -1,6 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Router from "next/router";
+
 import styles from "../styles/Search.module.css";
+
+const NumberMaxOfResults = 5;
 
 function getCorrectResultIndex(index, length) {
   if (index === -1) {
@@ -20,15 +24,11 @@ export function Search() {
 
   const searchEndpoint = (query) => `/api/search?q=${query}`;
   function updateResults(query) {
-    // if (query !== "") {
     fetch(searchEndpoint(query))
       .then((res) => res.json())
       .then((res) => {
-        setResults(res.results);
+        setResults(res.results.slice(0, NumberMaxOfResults));
       });
-    // } else {
-    // setResults([]);
-    // }
   }
 
   const hasResults = results && results.length > 0;
@@ -55,7 +55,10 @@ export function Search() {
   useEffect(() => {
     if (isEnterDown) {
       if (activeResultIndex === 0) {
-        console.log("Should redirect to seach page");
+        Router.push({
+          pathname: "/search",
+          query: { search: encodeURI(query) },
+        });
       } else {
         const resultsItems = Array.from(resultsRef.current.children);
         resultsItems[activeResultIndex - 1].lastChild.click();
@@ -135,10 +138,7 @@ export function Search() {
 
   return (
     <div className={styles.module}>
-      <div ref={wrapperRef} className={styles.container}>
-        <div className={styles.logoUpWrapper}>
-          <div className={styles.logoUp}></div>
-        </div>
+      <div ref={wrapperRef}>
         <input
           className={styles.search}
           placeholder="Search sheets"

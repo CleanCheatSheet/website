@@ -1,13 +1,10 @@
-/* Top Navigation Bar */
-
-/* <nav> */
 .navbar {
   display: flex;
   justify-content: center;
 }
 
 .logo {
-  padding: 1rem;
+  margin: 1rem;
   width: auto;
   height: auto;
 }

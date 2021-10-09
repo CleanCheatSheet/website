@@ -3,15 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-export function Navbar() {
+export function Navbar(props) {
   return (
     <nav className={styles.navbar}>
-      <Logo />
+      <Logo logoSize={props.logoSize} />
     </nav>
   );
 }
 
-function Logo() {
+function Logo(props) {
   return (
     <div className={styles.logo}>
       <Link href="/">
@@ -19,8 +19,8 @@ function Logo() {
           <Image
             src="/logo-ccs.svg"
             alt="CleanCheatSheet Logo"
-            width="64"
-            height="64"
+            width={props.logoSize}
+            height={props.logoSize}
           />
         </a>
       </Link>

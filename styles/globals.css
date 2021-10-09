@@ -21,6 +21,7 @@
   --background-zoom: 500%;
   --background-duration: 120s;
   --white: hsl(0, 0%, 100%, 90%);
+  --background-color: hsl(0, 0%, 85%, 90%);
   --greyLight-0: hsl(0, 0%, 90%, 90%);
   --greyLight-1: hsl(215, 46%, 93%, 90%);
   --greyLight-2: hsl(225, 39%, 85%, 90%);
@@ -35,14 +36,21 @@
   --filter-hover: brightness(1.1);
 }
 
+html,
+body,
+#__next {
+  height: 100%;
+}
+
 body {
   padding: 0;
   margin: 0;
-  background-image: var(--gradient);
+  background: var(--background-color);
+  /* background-image: var(--gradient);
   background-size: var(--background-zoom);
   background-repeat: no-repeat;
   background-attachment: fixed;
-  animation: background-animation var(--background-duration) infinite alternate;
+  animation: background-animation var(--background-duration) infinite alternate; */
   /* font-family: "Noto Sans", Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
   font-family: Poppins, ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
