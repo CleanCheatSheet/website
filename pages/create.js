@@ -1,7 +1,25 @@
 import Head from "next/head";
-import { Headline } from "../components/headline";
 import styles from "../styles/Create.module.css";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
+import { CleanCheatSheet } from "../components/sheet";
+
+import marked from "marked";
+import hljs from "highlight.js";
+import matter from "gray-matter";
+
+marked.setOptions({
+  langPrefix: "hljs language-",
+  highlight: function (code) {
+    return hljs.highlightAuto(code, ["html", "javascript"]).value;
+  },
+});
+
+export function createSheet(baseUrl, content) {
+  const sheet = matter(content);
+  marked.setOptions({ baseUrl: baseUrl });
+  sheet.sheets = marked(sheet.content).split("+++");
+  return sheet;
+}
 
 function getSessionStorageOrDefault(key, defaultValue) {
   const stored = sessionStorage.getItem(key);
@@ -13,44 +31,60 @@ function getSessionStorageOrDefault(key, defaultValue) {
 
 export default function Create() {
   const [input, setInput] = useState("");
-  const [css, setCss] = useState("");
-  const [content, setContent] = useState("");
-  // const inputRef = useCallback((node) => {
-  //   if (node !== null) {
-  //     if (node.value !== null) {
-  //       setInput(node.value);
-  //       updateSheet(node.value);
-  //     }
-  //   }
-  // }, []);
+  const [data, setData] = useState({ color: "black", title: "title" });
+  const [sheets, setSheets] = useState([""]);
+  // const [isHandlerDragging, setIsHandlerDragging] = useState(false);
+  var isHandlerDragging = false;
+  const boxRef = useRef(null);
+  const handlerRef = useRef(null);
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
-    console.log("First useEffect::", input);
     setInput(getSessionStorageOrDefault("input", ""));
-    console.log("After first useEffect::", input);
+    document.addEventListener("mousedown", function (e) {
+      // If mousedown event is fired from .handler, toggle flag to true
+      console.log("Mousse down::", e.target);
+      if (e.target === handlerRef.current) {
+        console.log("On Handler");
+        // setIsHandlerDragging(true);
+        isHandlerDragging = true;
+      }
+    });
+    document.addEventListener("mousemove", function (e) {
+      // Don't do anything if dragging flag is false
+      console.log("Mousse Drag::", isHandlerDragging);
+      if (!isHandlerDragging) {
+        return false;
+      }
+      // Get offset
+      var containerOffsetLeft = wrapperRef.current.offsetLeft;
+      // Get x-coordinate of pointer relative to container
+      var pointerRelativeXpos = e.clientX - containerOffsetLeft;
+      // Arbitrary minimum width set on box A, otherwise its inner content will collapse to width of 0
+      var boxAminWidth = 100;
+      // Resize box A
+      // * 8px is the left/right spacing between .handler and its inner pseudo-element
+      // * Set flex-grow to 0 to prevent it from growing
+      boxRef.current.style.width =
+        Math.max(boxAminWidth, pointerRelativeXpos - 8) + "px";
+      boxRef.current.style.flexGrow = 0;
+    });
+    document.addEventListener("mouseup", function (e) {
+      // Turn off dragging flag when user mouse is up
+      // setIsHandlerDragging(false);
+      isHandlerDragging = false;
+    });
   }, []);
 
   useEffect(() => {
-    console.log("Second useEffect::", input);
     sessionStorage.setItem("input", JSON.stringify(input));
     updateSheet(input);
   }, [input]);
 
   async function updateSheet(input) {
-    console.log("Fetch in progress with input::", input);
-    fetch("http://localhost:8080", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ baseUrl: "", content: input }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setCss(res.css);
-        setContent(res.content);
-      });
+    const sheet = createSheet("", input);
+    setData(sheet.data);
+    setSheets(sheet.sheets);
   }
 
   function handleOnChange(event) {
@@ -62,30 +96,34 @@ export default function Create() {
     <>
       <Head>
         <title>Clean Cheat Sheet</title>
+        <link
+          rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css"
+        />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
         <meta name="description" content="Clean Cheat Sheet for everything" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Headline title="Create your sheet" subtitle="" />
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
+      <div ref={wrapperRef} className={styles.wrapper}>
+        <div ref={boxRef} className={styles.container}>
           <div className={styles.nav}>Markdown</div>
           <textarea
             className={styles.textarea}
-            // ref={inputRef}
             value={input}
             autoFocus
             onChange={handleOnChange}
           ></textarea>
         </div>
-        <style jsx>{css}</style>
+        <div ref={handlerRef} className={styles.handler}></div>
         <div className={styles.container}>
           <div className={styles.nav}>Sheet</div>
-          <main>
-            <section
-              className="basic-grid"
-              dangerouslySetInnerHTML={{ __html: content }}
-            ></section>
-          </main>
+          <div className={styles.sheet}>
+            <CleanCheatSheet
+              title={data.title}
+              color={data.firstColor}
+              sheets={sheets}
+            />
+          </div>
         </div>
       </div>
     </>

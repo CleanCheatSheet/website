@@ -8,17 +8,20 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
   return (
     <>
-      {router.asPath !== "/" && router.pathname !== "/search" && (
+      {router.asPath !== "/" &&
+        router.pathname !== "/search" &&
+        router.pathname !== "/create" && (
+          <>
+            <Navbar logoSize="64" />
+            <Search />
+          </>
+        )}
+      {(router.pathname === "/search" || router.pathname === "/create") && (
         <>
           <Navbar logoSize="64" />
-          <Search />
         </>
       )}
-      {router.pathname === "/search" && (
-        <>
-          <Navbar logoSize="64" />
-        </>
-      )}
+
       <Component {...pageProps} />
       <Footer />
     </>

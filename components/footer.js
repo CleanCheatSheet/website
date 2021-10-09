@@ -14,6 +14,11 @@ export function Footer(props) {
             </Link>
           </div>
           <div className={styles.text}>
+            <Link href="/create" className={styles.icon}>
+              <a>Create</a>
+            </Link>
+          </div>
+          <div className={styles.text}>
             <Link href="/contribute" className={styles.icon}>
               <a>Contribute</a>
             </Link>

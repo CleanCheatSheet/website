@@ -3,13 +3,13 @@ import styles from "../styles/Sheet.module.css";
 export function CleanCheatSheet(props) {
   return (
     <>
+      <style global jsx>{`
+        img {
+          max-width: 30rem;
+          width: 100%;
+        }
+      `}</style>
       <main>
-        <style jsx>{`
-          img {
-            width: 100%;
-            max-width: var(--card-width);
-          }
-        `}</style>
         <section className={styles.basicGrid}>
           {props.sheets.map((sheet, index) => {
             return (

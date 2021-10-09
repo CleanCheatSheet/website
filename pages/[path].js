@@ -14,7 +14,7 @@ marked.setOptions({
   },
 });
 
-function getHTML(baseUrl, content) {
+export function createSheet(baseUrl, content) {
   const sheet = matter(content);
   marked.setOptions({ baseUrl: baseUrl });
   sheet.sheets = marked(sheet.content).split("+++");
@@ -48,6 +48,6 @@ export async function getServerSideProps({ params }) {
   const baseUrl = `https://raw.githubusercontent.com/CleanCheatSheet/sheets/main/${params.path}/`;
   const readmeReq = await fetch(baseUrl + "README.md");
   const readme = await readmeReq.text();
-  const sheet = getHTML(baseUrl, readme);
+  const sheet = createSheet(baseUrl, readme);
   return { props: { sheets: sheet.sheets, data: sheet.data } };
 }
