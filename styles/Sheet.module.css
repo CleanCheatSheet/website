@@ -1,0 +1,17 @@
+.card {
+  font-size: small;
+  background: var(--greyLight-0);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.basicGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 30rem);
+  grid-auto-rows: 40rem;
+  justify-content: center;
+  padding-top: 1rem;
+}

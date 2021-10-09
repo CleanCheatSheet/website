@@ -1,11 +1,30 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-export default function Sheet({ readme, sheet }) {
+import { CleanCheatSheet } from "../components/sheet";
+
+import marked from "marked";
+import hljs from "highlight.js";
+import matter from "gray-matter";
+
+marked.setOptions({
+  langPrefix: "hljs language-",
+  highlight: function (code) {
+    return hljs.highlightAuto(code, ["html", "javascript"]).value;
+  },
+});
+
+function getHTML(baseUrl, content) {
+  const sheet = matter(content);
+  marked.setOptions({ baseUrl: baseUrl });
+  sheet.sheets = marked(sheet.content).split("+++");
+  return sheet;
+}
+
+export default function Sheet({ sheets, data }) {
   const router = useRouter();
   const { path } = router.query;
 
-  const css = sheet.css;
   return (
     <div>
       <Head>
@@ -16,13 +35,11 @@ export default function Sheet({ readme, sheet }) {
         />
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
       </Head>
-      <style jsx>{css}</style>
-      <main>
-        <section
-          className="basic-grid"
-          dangerouslySetInnerHTML={{ __html: sheet.content }}
-        ></section>
-      </main>
+      <CleanCheatSheet
+        title={data.title}
+        color={data.firstColor}
+        sheets={sheets}
+      />
     </div>
   );
 }
@@ -31,16 +48,6 @@ export async function getServerSideProps({ params }) {
   const baseUrl = `https://raw.githubusercontent.com/CleanCheatSheet/sheets/main/${params.path}/`;
   const readmeReq = await fetch(baseUrl + "README.md");
   const readme = await readmeReq.text();
-  const sheetReq = await fetch("http://localhost:8080", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ baseUrl: baseUrl, content: readme }),
-  });
-  const sheet = await sheetReq.json();
-  return {
-    props: { readme: readme, sheet: sheet },
-  };
+  const sheet = getHTML(baseUrl, readme);
+  return { props: { sheets: sheet.sheets, data: sheet.data } };
 }
