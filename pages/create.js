@@ -1,12 +1,14 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { Action, App, Octokit } from "octokit";
 import { useEffect, useRef, useState } from "react";
 
 import { CleanCheatSheet } from "../components/sheet";
 import Head from "next/head";
+import { createPullRequest } from "octokit-plugin-create-pull-request";
 import hljs from "highlight.js";
 import marked from "marked";
 import matter from "gray-matter";
 import styles from "../styles/Create.module.css";
+import { useSession } from "next-auth/react";
 
 marked.setOptions({
   langPrefix: "hljs language-",
@@ -31,6 +33,8 @@ function getSessionStorageOrDefault(key, defaultValue) {
 }
 
 export default function Create() {
+  const MyOctokit = Octokit.plugin(createPullRequest);
+
   const [input, setInput] = useState("");
   const [data, setData] = useState({ color: "black", title: "title" });
   const [sheets, setSheets] = useState([""]);
@@ -38,8 +42,104 @@ export default function Create() {
   const boxRef = useRef(null);
   const handlerRef = useRef(null);
   const wrapperRef = useRef(null);
+  const [image, setImage] = useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  const uploadToClient = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+
+      setImage(i);
+      setCreateObjectURL(URL.createObjectURL(i));
+    }
+  };
+
+  const uploadToServer = async (event) => {
+    const body = new FormData();
+    body.append("file", image);
+    const response = await fetch("/api/file", {
+      method: "POST",
+      body,
+    });
+    const path = await response.text();
+    console.log("Add path::", path);
+    console.log(uploadedFiles);
+    console.log([...uploadedFiles, path]);
+    setUploadedFiles((prevArr) => [...prevArr, path]);
+  };
 
   const { data: session } = useSession();
+
+  function createRepo(name) {
+    console.log("Create REPO function", session);
+    // if (typeof session !== "undefined" && session !== null) {
+    //   const octokit = new MyOctokit({ auth: session.accessToken });
+    //   console.log("OCTOKIT::", octokit);
+    //   octokit.rest.repos
+    //     .createForAuthenticatedUser({
+    //       name,
+    //     })
+    //     .then((res) => console.log("CREATION OF THE REPO: ", res))
+    //     .catch((error) =>
+    //       alert(
+    //         `An error occured during the creation of the repository: \n${error}\n\nPlease try again.`
+    //       )
+    //     );
+    // } else {
+    //   alert("You need to login using GitHub first.");
+    // }
+  }
+
+  function pullRequest() {
+    console.log("Create REPO function", session);
+    if (typeof session !== "undefined" && session !== null) {
+      const octokit = new MyOctokit({ auth: session.accessToken });
+      console.log("OCTOKIT::", octokit);
+      octokit
+        .createPullRequest({
+          owner: "CleanCheatSheet",
+          repo: "sheets",
+          title: "pull request test",
+          body: "pull request description",
+          base: "main" /* optional: defaults to default branch */,
+          head: "pull-request-branch-name",
+          changes: [
+            {
+              /* optional: if `files` is not passed, an empty commit is created instead */
+              // files: {
+              //   "path/to/file1.txt": "Content for file1",
+              //   "path/to/file2.png": {
+              //     content: "_base64_encoded_content_",
+              //     encoding: "base64",
+              //   },
+              //   // deletes file if it exists,
+              //   "path/to/file3.txt": null,
+              //   // updates file based on current content
+              //   "path/to/file4.txt": ({ exists, encoding, content }) => {
+              //     // do not create the file if it does not exist
+              //     if (!exists) return null;
+
+              //     return Buffer.from(content, encoding)
+              //       .toString("utf-8")
+              //       .toUpperCase();
+              //   },
+              // },
+              commit:
+                "creating file1.txt, file2.png, deleting file3.txt, updating file4.txt (if it exists)",
+            },
+          ],
+        })
+        .then((res) => console.log("CREATION OF THE PULL REQUEST: ", res))
+        .catch((error) =>
+          alert(
+            `An error occured during the PULL REQUEST: \n${error}\n\nPlease try again.`
+          )
+        );
+    } else {
+      alert("You need to login using GitHub first.");
+    }
+  }
 
   useEffect(() => {
     setInput(getSessionStorageOrDefault("input", ""));
@@ -83,7 +183,10 @@ export default function Create() {
   }, [input]);
 
   async function updateSheet(input) {
-    const sheet = createSheet("", input);
+    const sheet = createSheet(
+      `${process.env.DOMAIN}/_next/image?w=256&q=100&url=`,
+      input
+    );
     setData(sheet.data);
     setSheets(sheet.sheets);
   }
@@ -105,9 +208,19 @@ export default function Create() {
         <meta name="description" content="Clean Cheat Sheet for everything" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className={styles.nav}>
+        <button onClick={() => createRepo("CleanCheatSheets")}>
+          create repo
+        </button>
+        <button onClick={() => pullRequest()}>create pull request</button>
+        <input type="file" name="myImage" onChange={uploadToClient} />
+        <button type="submit" onClick={uploadToServer}>
+          Send to server
+        </button>
+        {JSON.stringify(uploadedFiles)}
+      </div>
       <div ref={wrapperRef} className={styles.wrapper}>
         <div ref={boxRef} className={styles.container}>
-          <div className={styles.nav}>Markdown</div>
           <textarea
             className={styles.textarea}
             value={input}
@@ -117,7 +230,6 @@ export default function Create() {
         </div>
         <div ref={handlerRef} className={styles.handler}></div>
         <div className={styles.container}>
-          <div className={styles.nav}>Sheet</div>
           <div className={styles.sheet}>
             <CleanCheatSheet
               title={data.title}

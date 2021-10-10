@@ -1,6 +1,6 @@
 .wrapper {
   width: 100%;
-  height: calc(100% - 6rem - 7rem);
+  height: calc(100% - 6rem - 7rem - 4rem);
   display: flex;
 }
 
@@ -16,15 +16,18 @@
 
 .nav {
   width: 100%;
-  height: 4rem;
+  height: 3.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  /* background: var(--greyLight-0); */
+  /* box-shadow: var(--box-shadow); */
 }
 
 .handler {
   width: 0.5rem;
-  height: calc(100%-4rem);
-  margin-top: 4rem;
+  height: calc(100%);
   cursor: ew-resize;
   flex: 0 0 auto;
   background: hsl(0, 0%, 0%, 60%);
@@ -32,26 +35,26 @@
 
 .textarea {
   background: var(--greyLight-0);
-  box-shadow: var(--box-shadow-hover);
+  box-shadow: var(--box-shadow);
   margin-right: 1rem;
   margin-left: 1rem;
   padding: 0.5rem;
   border: none;
   outline: none !important;
   width: calc(100% - 3rem);
-  height: calc(100% - 5rem);
+  height: calc(100% - 1rem);
   overflow-x: hidden;
   resize: none;
 }
 
 .sheet {
   background: var(--greyLight-0);
-  box-shadow: var(--box-shadow-hover);
+  box-shadow: var(--box-shadow);
   margin-right: 1rem;
   margin-left: 1rem;
   padding: 0.5rem;
   width: calc(100% - 3rem);
-  height: calc(100% - 5rem);
+  height: calc(100% - 1rem);
   overflow-y: scroll;
 }
 

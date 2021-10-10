@@ -6,5 +6,9 @@
 }
 
 .space {
-  height: 1rem;
+  height: 3rem;
+}
+
+.spaceAbove {
+  height: 10rem;
 }

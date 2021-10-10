@@ -15,6 +15,7 @@ export default function Home() {
         <Navbar logoSize="128" displaySignIn={false} />
         <div className={styles.space}></div>
         <Search />
+        <div className={styles.spaceAbove}></div>
       </div>
     </>
   );
