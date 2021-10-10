@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <Navbar logoSize="128" />
+        <Navbar logoSize="128" displaySignIn={false} />
         <div className={styles.space}></div>
         <Search />
       </div>

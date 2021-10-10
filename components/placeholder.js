@@ -1,7 +1,6 @@
-import styles from "../styles/Placeholder.module.css";
-import Image from "next/image";
-
 import { Button } from "./button";
+import Image from "next/image";
+import styles from "../styles/Placeholder.module.css";
 
 export function PlaceholderLeft(props) {
   return (

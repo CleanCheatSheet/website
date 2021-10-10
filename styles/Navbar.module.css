@@ -1,10 +1,32 @@
 .navbar {
+  min-width: 100%;
   display: flex;
-  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.borderDiv {
+  min-width: 25%;
+  height: auto;
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
 .logo {
-  margin: 1rem;
+  min-width: 50%;
+  display: flex;
+  justify-content: center;
   width: auto;
   height: auto;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  margin-right: 2rem;
+  padding: 0.5rem;
+  background: var(--greyLight-0);
+  box-shadow: var(--box-shadow);
+  border-radius: 1.5rem;
 }

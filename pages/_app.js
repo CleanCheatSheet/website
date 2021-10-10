@@ -1,13 +1,15 @@
 import "../styles/globals.css";
+
+import { Footer } from "../components/footer";
 import { Navbar } from "../components/navbar";
 import { Search } from "../components/search";
-import { Footer } from "../components/footer";
+import { SessionProvider } from "next-auth/react";
 import { useRouter } from "next/router";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
   return (
-    <>
+    <SessionProvider session={session}>
       {router.asPath !== "/" &&
         router.pathname !== "/search" &&
         router.pathname !== "/create" && (
@@ -24,7 +26,7 @@ function MyApp({ Component, pageProps }) {
 
       <Component {...pageProps} />
       <Footer />
-    </>
+    </SessionProvider>
   );
 }
 

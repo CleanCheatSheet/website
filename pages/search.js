@@ -1,11 +1,10 @@
-import Head from "next/head";
-
-import styles from "../styles/SearchPage.module.css";
-import stylesSearch from "../styles/Search.module.css";
-import Router from "next/router";
 import { useEffect, useState } from "react";
 
 import { CardMosaic } from "../components/card";
+import Head from "next/head";
+import Router from "next/router";
+import styles from "../styles/SearchPage.module.css";
+import stylesSearch from "../styles/Search.module.css";
 
 function stringFromSearch(search) {
   return search ? decodeURIComponent(search) : "";

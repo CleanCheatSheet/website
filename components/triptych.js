@@ -1,6 +1,6 @@
-import styles from "../styles/Triptych.module.css";
-import Image from "next/image";
 import { Button } from "./button";
+import Image from "next/image";
+import styles from "../styles/Triptych.module.css";
 
 export function Triptych(props) {
   return (

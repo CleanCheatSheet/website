@@ -1,7 +1,8 @@
+import { PlaceholderLeft, PlaceholderRight } from "../components/placeholder";
+
+import { CardMosaic } from "../components/card";
 import Head from "next/head";
 import { Headline } from "../components/headline";
-import { CardMosaic } from "../components/card";
-import { PlaceholderLeft, PlaceholderRight } from "../components/placeholder";
 import { Triptych } from "../components/triptych";
 
 export default function About() {

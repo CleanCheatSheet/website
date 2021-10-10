@@ -1,7 +1,7 @@
-import styles from "../styles/Footer.module.css";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import githubLogo from "../public/github.svg";
+import styles from "../styles/Footer.module.css";
 
 export function Footer(props) {
   return (

@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+
 import Link from "next/link";
 import Router from "next/router";
-
 import styles from "../styles/Search.module.css";
 
 const NumberMaxOfResults = 5;
@@ -135,7 +135,6 @@ export function Search() {
   function handleOnFocus() {
     updateResults(query);
   }
-
   return (
     <div className={styles.module}>
       <div ref={wrapperRef}>

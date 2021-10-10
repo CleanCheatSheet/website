@@ -1,11 +1,9 @@
-import { useRouter } from "next/router";
-import Head from "next/head";
-
 import { CleanCheatSheet } from "../components/sheet";
-
-import marked from "marked";
+import Head from "next/head";
 import hljs from "highlight.js";
+import marked from "marked";
 import matter from "gray-matter";
+import { useRouter } from "next/router";
 
 marked.setOptions({
   langPrefix: "hljs language-",

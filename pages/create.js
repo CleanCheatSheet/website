@@ -1,11 +1,12 @@
-import Head from "next/head";
-import styles from "../styles/Create.module.css";
-import { useState, useEffect, useRef } from "react";
-import { CleanCheatSheet } from "../components/sheet";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useEffect, useRef, useState } from "react";
 
-import marked from "marked";
+import { CleanCheatSheet } from "../components/sheet";
+import Head from "next/head";
 import hljs from "highlight.js";
+import marked from "marked";
 import matter from "gray-matter";
+import styles from "../styles/Create.module.css";
 
 marked.setOptions({
   langPrefix: "hljs language-",
@@ -33,11 +34,12 @@ export default function Create() {
   const [input, setInput] = useState("");
   const [data, setData] = useState({ color: "black", title: "title" });
   const [sheets, setSheets] = useState([""]);
-  // const [isHandlerDragging, setIsHandlerDragging] = useState(false);
   var isHandlerDragging = false;
   const boxRef = useRef(null);
   const handlerRef = useRef(null);
   const wrapperRef = useRef(null);
+
+  const { data: session } = useSession();
 
   useEffect(() => {
     setInput(getSessionStorageOrDefault("input", ""));
@@ -46,7 +48,6 @@ export default function Create() {
       console.log("Mousse down::", e.target);
       if (e.target === handlerRef.current) {
         console.log("On Handler");
-        // setIsHandlerDragging(true);
         isHandlerDragging = true;
       }
     });
