@@ -1,19 +1,3 @@
-.wrapper {
-  width: 100%;
-  height: calc(100% - 6rem - 7rem - 4rem);
-  display: flex;
-}
-
-.container {
-  width: calc(50% - 0.25rem);
-  height: 100%;
-  flex: 1 1 auto;
-}
-
-.container:last-of-type {
-  width: auto;
-}
-
 .nav {
   width: 100%;
   height: 3.5rem;
@@ -28,43 +12,4 @@
 .form {
   height: calc(100% - 6rem - 7rem - 4rem);
   background-color: lightblue;
-}
-
-.handler {
-  width: 0.25rem;
-  height: calc(100%);
-  cursor: ew-resize;
-  flex: 0 0 auto;
-  background: hsl(0, 0%, 0%, 60%);
-}
-
-.textarea {
-  background: var(--greyLight-0);
-  box-shadow: var(--box-shadow);
-  margin-right: 0rem;
-  margin-left: 1rem;
-  padding: 0.5rem;
-  border: none;
-  outline: none !important;
-  width: calc(100% - 2rem);
-  height: calc(100% - 1rem);
-  overflow-x: hidden;
-  resize: none;
-}
-
-.sheet {
-  background: var(--greyLight-0);
-  box-shadow: var(--box-shadow);
-  margin-right: 1rem;
-  margin-left: 0rem;
-  padding: 0.5rem;
-  width: calc(100% - 2rem);
-  height: calc(100% - 1rem);
-  overflow-y: scroll;
-}
-
-.container > main {
-  margin-left: 1rem;
-  margin-right: 1rem;
-  width: calc(100% - 2rem);
 }
