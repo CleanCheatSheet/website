@@ -25,8 +25,13 @@
   /* box-shadow: var(--box-shadow); */
 }
 
+.form {
+  height: calc(100% - 6rem - 7rem - 4rem);
+  background-color: lightblue;
+}
+
 .handler {
-  width: 0.5rem;
+  width: 0.25rem;
   height: calc(100%);
   cursor: ew-resize;
   flex: 0 0 auto;
@@ -36,12 +41,12 @@
 .textarea {
   background: var(--greyLight-0);
   box-shadow: var(--box-shadow);
-  margin-right: 1rem;
+  margin-right: 0rem;
   margin-left: 1rem;
   padding: 0.5rem;
   border: none;
   outline: none !important;
-  width: calc(100% - 3rem);
+  width: calc(100% - 2rem);
   height: calc(100% - 1rem);
   overflow-x: hidden;
   resize: none;
@@ -51,9 +56,9 @@
   background: var(--greyLight-0);
   box-shadow: var(--box-shadow);
   margin-right: 1rem;
-  margin-left: 1rem;
+  margin-left: 0rem;
   padding: 0.5rem;
-  width: calc(100% - 3rem);
+  width: calc(100% - 2rem);
   height: calc(100% - 1rem);
   overflow-y: scroll;
 }
