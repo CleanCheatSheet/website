@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codemirror/lang-markdown": "^0.19.1",
+    "@codemirror/language-data": "^0.19.0",
+    "@uiw/react-codemirror": "^4.1.0",
     "formidable": "^1.2.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.2.0",

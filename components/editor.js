@@ -1,10 +1,13 @@
+import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { useEffect, useRef, useState } from "react";
 
 import { CleanCheatSheet } from "../components/sheet";
+import CodeMirror from "@uiw/react-codemirror";
 import { createSheet } from "../pages/[path]";
+import { languages } from "@codemirror/language-data";
 import styles from "../styles/Editor.module.css";
 
-function getSessionStorageOrDefault(key, defaultValue) {
+export function getSessionStorageOrDefault(key, defaultValue) {
   const stored = sessionStorage.getItem(key);
   if (!stored) {
     return defaultValue;
@@ -12,8 +15,7 @@ function getSessionStorageOrDefault(key, defaultValue) {
   return JSON.parse(stored);
 }
 
-export function Editor() {
-  const [input, setInput] = useState("");
+export function Editor({ input, setInput }) {
   const [data, setData] = useState({ color: "black", title: "title" });
   const [sheets, setSheets] = useState([""]);
   var isHandlerDragging = false;
@@ -71,19 +73,31 @@ export function Editor() {
     setSheets(sheet.sheets);
   }
 
-  function handleOnChange(event) {
-    const input = event.target.value;
-    setInput(input);
+  // function handleOnChange(event) {
+  //   const input = event.target.value;
+  //   setInput(input);
+  // }
+  function handleOnChange(value, viewUpdate) {
+    setInput(value);
   }
   return (
     <div ref={wrapperRef} className={styles.wrapper}>
       <div ref={boxRef} className={styles.container}>
-        <textarea
+        {/* <textarea
           className={styles.textarea}
           value={input}
           autoFocus
           onChange={handleOnChange}
-        ></textarea>
+        ></textarea> */}
+
+        <CodeMirror
+          value={input}
+          className={styles.codemirror}
+          extensions={[
+            markdown({ base: markdownLanguage, codeLanguages: languages }),
+          ]}
+          onChange={handleOnChange}
+        />
       </div>
       <div ref={handlerRef} className={styles.handler}></div>
       <div className={styles.container}>

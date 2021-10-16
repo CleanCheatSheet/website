@@ -10,6 +10,10 @@
   flex: 1 1 auto;
 }
 
+.container:first-of-type {
+  max-width: calc(100% - 34rem);
+}
+
 .container:last-of-type {
   width: auto;
 }
@@ -22,7 +26,7 @@
   background: hsl(0, 0%, 0%, 60%);
 }
 
-.textarea {
+/* .textarea {
   background: var(--greyLight-0);
   box-shadow: var(--box-shadow);
   margin-right: 0rem;
@@ -34,6 +38,20 @@
   height: calc(100% - 1rem);
   overflow-x: hidden;
   resize: none;
+  scrollbar-color: gray transparent;
+} */
+
+.codemirror {
+  background: var(--greyLight-0);
+  box-shadow: var(--box-shadow);
+  margin-left: 1rem;
+  /* border: none; */
+  /* outline: none !important; */
+  height: 100%;
+  width: calc(100% - 1rem);
+  overflow-x: hidden;
+  /* resize: none; */
+  scrollbar-color: gray transparent;
 }
 
 .sheet {
@@ -45,10 +63,15 @@
   width: calc(100% - 2rem);
   height: calc(100% - 1rem);
   overflow-y: scroll;
+  scrollbar-color: gray transparent;
 }
 
 .container > main {
   margin-left: 1rem;
   margin-right: 1rem;
   width: calc(100% - 2rem);
+}
+
+.container * {
+  user-select: none;
 }
