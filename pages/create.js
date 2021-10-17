@@ -6,8 +6,6 @@ import styles from "../styles/Create.module.css";
 import { useState } from "react";
 
 export default function Create() {
-  const [input, setInput] = useState("");
-
   const [displayForm, setDisplayForm] = useState(false);
   const [displayUploader, setDisplayUploader] = useState(false);
 
@@ -46,9 +44,7 @@ export default function Create() {
         )}
       </div>
       {displayForm && !displayUploader && <Publisher />}
-      {!displayForm && !displayUploader && (
-        <Editor input={input} setInput={setInput} />
-      )}
+      {!displayForm && !displayUploader && <Editor />}
       {!displayForm && displayUploader && <Uploader />}
     </>
   );

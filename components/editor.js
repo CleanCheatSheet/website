@@ -15,7 +15,8 @@ export function getSessionStorageOrDefault(key, defaultValue) {
   return JSON.parse(stored);
 }
 
-export function Editor({ input, setInput }) {
+export function Editor() {
+  const [input, setInput] = useState("");
   const [data, setData] = useState({ color: "black", title: "title" });
   const [sheets, setSheets] = useState([""]);
   var isHandlerDragging = false;
@@ -92,6 +93,8 @@ export function Editor({ input, setInput }) {
 
         <CodeMirror
           value={input}
+          height="100%"
+          placeholder="Enter Markdown here"
           className={styles.codemirror}
           extensions={[
             markdown({ base: markdownLanguage, codeLanguages: languages }),
