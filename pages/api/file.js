@@ -7,15 +7,6 @@ export const config = {
   },
 };
 
-const post = async (req, res) => {
-  const form = new formidable.IncomingForm();
-  form.parse(req, async function (err, fields, files) {
-    const path = await saveFile(files.file);
-    console.log("PATHHHH::", path);
-    return res.status(201).send(path);
-  });
-};
-
 const saveFile = async (file) => {
   const data = fs.readFileSync(file.path);
   fs.writeFileSync(`./public/tmp/${file.name.replace(/\s/g, "_")}`, data);
@@ -23,14 +14,14 @@ const saveFile = async (file) => {
   return `/tmp/${file.name.replace(/\s/g, "_")}`;
 };
 
-export default (req, res) => {
-  req.method === "POST"
-    ? post(req, res)
-    : req.method === "PUT"
-    ? console.log("PUT")
-    : req.method === "DELETE"
-    ? console.log("DELETE")
-    : req.method === "GET"
-    ? console.log("GET")
-    : res.status(404).send("");
-};
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    res.status(400).send({ message: "Only POST requests allowed" });
+    return;
+  }
+  const form = new formidable.IncomingForm();
+  form.parse(req, async function (err, fields, files) {
+    const path = await saveFile(files.file);
+    return res.status(201).send(path);
+  });
+}

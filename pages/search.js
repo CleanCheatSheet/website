@@ -22,9 +22,13 @@ export default function SearchPage({ query: { search } }) {
   const searchEndpoint = (query) => `/api/search?q=${query}`;
   function updateResults(query) {
     fetch(searchEndpoint(query))
-      .then((res) => res.json())
       .then((res) => {
-        setResults(res.results);
+        res.json().then((data) => {
+          setResults(data);
+        });
+      })
+      .catch((error) => {
+        alert(`Error while calling the search API: ${error}`);
       });
   }
 
@@ -56,13 +60,12 @@ export default function SearchPage({ query: { search } }) {
         </div>
         <CardMosaic
           displayText={false}
-          cards={results.map(({ title, index }) => {
+          cards={results.map(({ title, description, url, index }) => {
             return {
               key: index,
-              link: `/${title}`,
+              link: `/${url}`,
               title: title,
-              description:
-                "Blablablabl ablablabla balblab blablablbal blablabl bla.",
+              description: description,
               src: "/markdown.png",
             };
           })}

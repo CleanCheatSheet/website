@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Octokit } from "octokit";
 import { createPullRequest } from "octokit-plugin-create-pull-request";
-import { getSessionStorageOrDefault } from "./editor";
+import { getSessionStorageOrDefault } from "../utils/storage";
 import styles from "../styles/Publisher.module.css";
 import { useSession } from "next-auth/react";
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Image from "next/image";
-import { getSessionStorageOrDefault } from "./editor";
+import { getSessionStorageOrDefault } from "../utils/storage";
 import styles from "../styles/Uploader.module.css";
 
 export function Uploader() {
