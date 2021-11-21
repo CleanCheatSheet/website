@@ -3,17 +3,10 @@ import { useEffect, useRef, useState } from "react";
 
 import { CleanCheatSheet } from "../components/sheet";
 import CodeMirror from "@uiw/react-codemirror";
-import { createSheet } from "../pages/[path]";
+import { createSheet } from "../utils/sheet";
+import { getSessionStorageOrDefault } from "../utils/storage";
 import { languages } from "@codemirror/language-data";
 import styles from "../styles/Editor.module.css";
-
-export function getSessionStorageOrDefault(key, defaultValue) {
-  const stored = sessionStorage.getItem(key);
-  if (!stored) {
-    return defaultValue;
-  }
-  return JSON.parse(stored);
-}
 
 export function Editor() {
   const [input, setInput] = useState("");
@@ -28,15 +21,12 @@ export function Editor() {
     setInput(getSessionStorageOrDefault("input", ""));
     document.addEventListener("mousedown", function (e) {
       // If mousedown event is fired from .handler, toggle flag to true
-      console.log("Mousse down::", e.target);
       if (e.target === handlerRef.current) {
-        console.log("On Handler");
         isHandlerDragging = true;
       }
     });
     document.addEventListener("mousemove", function (e) {
       // Don't do anything if dragging flag is false
-      console.log("Mousse Drag::", isHandlerDragging);
       if (!isHandlerDragging) {
         return false;
       }
@@ -66,10 +56,10 @@ export function Editor() {
   }, [input]);
 
   async function updateSheet(input) {
-    const sheet = createSheet(
-      `${process.env.DOMAIN}/_next/image?w=256&q=100&url=`,
-      input
-    );
+    const sheet = createSheet({
+      baseUrl: `${process.env.DOMAIN}/_next/image?w=256&q=100&url=`,
+      content: input,
+    });
     setData(sheet.data);
     setSheets(sheet.sheets);
   }
@@ -107,7 +97,7 @@ export function Editor() {
         <div className={styles.sheet}>
           <CleanCheatSheet
             title={data.title}
-            color={data.firstColor}
+            color={data.color}
             sheets={sheets}
           />
         </div>

@@ -25,9 +25,13 @@ export function Search() {
   const searchEndpoint = (query) => `/api/search?q=${query}`;
   function updateResults(query) {
     fetch(searchEndpoint(query))
-      .then((res) => res.json())
       .then((res) => {
-        setResults(res.results.slice(0, NumberMaxOfResults));
+        res.json().then((data) => {
+          setResults(data.slice(0, NumberMaxOfResults));
+        });
+      })
+      .catch((error) => {
+        alert(`Error while calling the search API: ${error}`);
       });
   }
 
@@ -149,10 +153,10 @@ export function Search() {
         />
         {hasResults && (
           <ul ref={resultsRef} className={styles.results}>
-            {results.map(({ title }) => {
+            {results.map(({ title, url }) => {
               return (
                 <li key={title} className={styles.result}>
-                  <Link href={`/${title}`} as={`/${title}`}>
+                  <Link href={`/${url}`} as={`/${url}`}>
                     <a
                       onClick={() => {
                         setQuery("");
