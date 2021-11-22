@@ -1,16 +1,19 @@
-.wrapper {
+/* .wrapper {
   display: flex;
-}
+} */
 
 .searchDiv {
   width: 100%;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
 }
 
 .inputDiv {
-  display: flex;
-  justify-content: center;
+  margin-inline: auto;
+  width: clamp(20rem, 70vw, 50rem);
 }
 
-.tagsDiv {
+/* .tagsDiv {
   width: 0%;
-}
+} */

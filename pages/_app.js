@@ -10,20 +10,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
   return (
     <SessionProvider session={session}>
-      {router.asPath !== "/" &&
-        router.pathname !== "/search" &&
-        router.pathname !== "/create" && (
-          <>
-            <Navbar logoSize="64" />
-            <Search />
-          </>
-        )}
-      {(router.pathname === "/search" || router.pathname === "/create") && (
-        <>
-          <Navbar logoSize="64" />
-        </>
-      )}
-
+      <Navbar />
       <Component {...pageProps} />
       <Footer />
     </SessionProvider>

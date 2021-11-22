@@ -60,7 +60,7 @@ export function Search() {
     if (isEnterDown) {
       if (activeResultIndex === 0) {
         Router.push({
-          pathname: "/search",
+          pathname: "/",
           query: { search: encodeURI(query) },
         });
       } else {
@@ -140,40 +140,40 @@ export function Search() {
     updateResults(query);
   }
   return (
-    <div className={styles.module}>
-      <div ref={wrapperRef}>
-        <input
-          className={styles.search}
-          placeholder="Search sheets"
-          type="text"
-          value={query}
-          onChange={handleOnChange}
-          onFocus={handleOnFocus}
-          ref={inputRef}
-        />
-        {hasResults && (
-          <ul ref={resultsRef} className={styles.results}>
-            {results.map(({ title, url }) => {
-              return (
-                <li key={title} className={styles.result}>
-                  <Link href={`/${url}`} as={`/${url}`}>
-                    <a
-                      onClick={() => {
-                        setQuery("");
-                        setResults([]);
-                        document.activeElement.blur();
-                      }}
-                      className={styles.link}
-                    >
-                      <p>{title}</p>
-                    </a>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
+    // <div className={styles.module}>
+    <div ref={wrapperRef} className={styles.wrapper}>
+      <input
+        className={styles.search}
+        placeholder="Search sheets"
+        type="text"
+        value={query}
+        onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        ref={inputRef}
+      />
+      {hasResults && (
+        <ul ref={resultsRef} className={styles.results}>
+          {results.map(({ title, url }) => {
+            return (
+              <li key={title} className={styles.result}>
+                <Link href={`/${url}`} as={`/${url}`}>
+                  <a
+                    onClick={() => {
+                      setQuery("");
+                      setResults([]);
+                      document.activeElement.blur();
+                    }}
+                    className={styles.link}
+                  >
+                    <p>{title}</p>
+                  </a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
+    // </div>
   );
 }
