@@ -1,10 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import Router from "next/router";
-import styles from "../styles/Search.module.css";
-
-const NumberMaxOfResults = 5;
+import styles from "../styles/BigSearch.module.css";
 
 function getCorrectResultIndex(index, length) {
   if (index === -1) {
@@ -24,15 +21,15 @@ export function Search() {
 
   const searchEndpoint = (query) => `/api/search?q=${query}`;
   function updateResults(query) {
+    // if (query !== "") {
     fetch(searchEndpoint(query))
+      .then((res) => res.json())
       .then((res) => {
-        res.json().then((data) => {
-          setResults(data.slice(0, NumberMaxOfResults));
-        });
-      })
-      .catch((error) => {
-        alert(`Error while calling the search API: ${error}`);
+        setResults(res.results);
       });
+    // } else {
+    // setResults([]);
+    // }
   }
 
   const hasResults = results && results.length > 0;
@@ -59,10 +56,7 @@ export function Search() {
   useEffect(() => {
     if (isEnterDown) {
       if (activeResultIndex === 0) {
-        Router.push({
-          pathname: "/",
-          query: { search: encodeURI(query) },
-        });
+        console.log("Should redirect to seach page");
       } else {
         const resultsItems = Array.from(resultsRef.current.children);
         resultsItems[activeResultIndex - 1].lastChild.click();
@@ -139,39 +133,53 @@ export function Search() {
   function handleOnFocus() {
     updateResults(query);
   }
+
   return (
-    <div ref={wrapperRef} className={styles.wrapper}>
-      <input
-        className={styles.search}
-        placeholder="Search sheets"
-        type="text"
-        value={query}
-        onChange={handleOnChange}
-        onFocus={handleOnFocus}
-        ref={inputRef}
-      />
-      {hasResults && (
-        <ul ref={resultsRef} className={styles.results}>
-          {results.map(({ title, url }) => {
-            return (
-              <li key={title} className={styles.result}>
-                <Link href={`/${url}`} as={`/${url}`}>
-                  <a
-                    onClick={() => {
-                      setQuery("");
-                      setResults([]);
-                      document.activeElement.blur();
-                    }}
-                    className={styles.link}
-                  >
-                    <p>{title}</p>
-                  </a>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+    <div className={styles.module}>
+      <div className={styles.logoBackground}>
+        <Image
+          alt="Logo background"
+          src="/logo-ccs-bg.png"
+          layout="fill"
+          className="logoBackground"
+        />
+      </div>
+      <div ref={wrapperRef} className={styles.container}>
+        <div className={styles.logoUpWrapper}>
+          <div className={styles.logoUp}></div>
+        </div>
+        <input
+          className={styles.search}
+          placeholder="Search sheets"
+          type="text"
+          value={query}
+          onChange={handleOnChange}
+          onFocus={handleOnFocus}
+          ref={inputRef}
+        />
+        {hasResults && (
+          <ul ref={resultsRef} className={styles.results}>
+            {results.map(({ title }) => {
+              return (
+                <li key={title} className={styles.result}>
+                  <Link href={`/${title}`} as={`/${title}`}>
+                    <a
+                      onClick={() => {
+                        setQuery("");
+                        setResults([]);
+                        document.activeElement.blur();
+                      }}
+                      className={styles.link}
+                    >
+                      <p>{title}</p>
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

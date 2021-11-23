@@ -1,16 +1,6 @@
-.wrapper {
-  display: flex;
-}
-
 .searchDiv {
   width: 100%;
-}
-
-.inputDiv {
-  display: flex;
-  justify-content: center;
-}
-
-.tagsDiv {
-  width: 0%;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
 }

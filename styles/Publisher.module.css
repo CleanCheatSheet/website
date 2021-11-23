@@ -1,6 +1,6 @@
 .wrapper {
   /* width: calc(100% - 2rem); */
-  height: calc(100% - 6rem - 7rem - 4rem);
+  height: calc(100% - 12rem);
   margin-left: 1rem;
   margin-right: 1rem;
   background: var(--greyLight-0);
@@ -34,12 +34,10 @@
 .form1 {
   width: 100%;
   /* background-color: blueviolet; */
-  
 }
 .form2 {
   width: 100%;
   /* background-color: red; */
-
 }
 
 /* .label {

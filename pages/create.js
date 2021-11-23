@@ -21,6 +21,13 @@ export default function Create() {
         <meta name="description" content="Clean Cheat Sheet for everything" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <style global jsx>{`
+        html,
+        body,
+        #__next {
+          height: 100vh;
+        }
+      `}</style>
       <div className={styles.nav}>
         {!displayForm && (
           <button
