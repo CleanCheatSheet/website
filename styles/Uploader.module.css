@@ -1,6 +1,6 @@
 .wrapper {
   /* width: calc(100% - 2rem); */
-  height: calc(100% - 6rem - 7rem - 4rem);
+  height: calc(100% - 12rem);
   margin-left: 1rem;
   margin-right: 1rem;
   background: var(--greyLight-0);

@@ -6,20 +6,11 @@ import Link from "next/link";
 import { Search } from "./search";
 import styles from "../styles/Navbar.module.css";
 
-export function Navbar(props) {
-  const displaySignIn =
-    typeof props.displaySignIn !== "undefined" ? props.displaySignIn : true;
+export function Navbar({ search = <Search /> }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const navRef = useRef(null);
   const buttonRef = useRef(null);
   return (
-    // <nav className={styles.navbar}>
-    //   <div className={styles.borderDiv}></div>
-    //   <Logo logoSize={props.logoSize} />
-    // <div className={styles.borderDiv}>
-    //   {displaySignIn === true && <SignIn />}
-    // </div>
-    // </nav>
     <header className={styles.primaryHeader}>
       <div className={styles.logo}>
         <Link href="/">
@@ -34,7 +25,7 @@ export function Navbar(props) {
           </a>
         </Link>
       </div>
-
+      {search}
       <button
         ref={buttonRef}
         className={styles.mobileNavToggle}
@@ -74,53 +65,26 @@ export function Navbar(props) {
           className={styles.primaryNavigation}
         >
           <li>
-            <Search />
-          </li>
-          <li>
             <Link href="/about">
-              <a>
-                {/* <span aria-hidden="true">01</span> */}
-                About
-              </a>
+              <a>About</a>
             </Link>
           </li>
           <li>
             <Link href="/create">
-              <a>
-                {/* <span aria-hidden="true">02</span> */}
-                Create
-              </a>
+              <a>Create</a>
             </Link>
           </li>
           <li>
             <Link href="/contribute">
-              <a>
-                {/* <span aria-hidden="true">03</span> */}
-                Contribute
-              </a>
+              <a>Contribute</a>
             </Link>
           </li>
-          <li>{displaySignIn === true && <SignIn />}</li>
+          <li>
+            <SignIn />
+          </li>
         </ul>
       </nav>
     </header>
-  );
-}
-
-function Logo(props) {
-  return (
-    <div className={styles.logo}>
-      <Link href="/">
-        <a>
-          <Image
-            src="/logo-ccs.svg"
-            alt="CleanCheatSheet Logo"
-            width={props.logoSize}
-            height={props.logoSize}
-          />
-        </a>
-      </Link>
-    </div>
   );
 }
 

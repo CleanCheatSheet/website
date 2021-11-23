@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { CardMosaic } from "../components/card";
 import Head from "next/head";
+import { Navbar } from "../components/navbar";
 import Router from "next/router";
 import styles from "../styles/SearchPage.module.css";
 import stylesSearch from "../styles/Search.module.css";
@@ -42,23 +43,26 @@ export default function SearchPage({ query: { search } }) {
   }
 
   return (
-    // <div className={styles.wrapper}>
     <>
       <Head>
         <title>Clean Cheat Sheet</title>
         <meta name="description" content="Clean Cheat Sheet for everything" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar
+        search={
+          <div className={stylesSearch.wrapper}>
+            <input
+              className={stylesSearch.search}
+              placeholder="Search sheets"
+              type="text"
+              value={stringFromSearch(search)}
+              onChange={handleOnChange}
+            />
+          </div>
+        }
+      />
       <div className={styles.searchDiv}>
-        <div className={styles.inputDiv}>
-          <input
-            className={stylesSearch.search}
-            placeholder="Search sheets"
-            type="text"
-            value={stringFromSearch(search)}
-            onChange={handleOnChange}
-          />
-        </div>
         <CardMosaic
           displayText={false}
           cards={results.map(({ title, description, url, index }) => {
@@ -72,8 +76,6 @@ export default function SearchPage({ query: { search } }) {
           })}
         />
       </div>
-      {/* <div className={styles.tagsDiv}></div> */}
-      {/* </div> */}
     </>
   );
 }

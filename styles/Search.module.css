@@ -7,7 +7,7 @@
 } */
 
 .wrapper {
-  width: clamp(8rem, 20vw, 20rem);
+  width: 20rem;
 }
 
 .search {
@@ -35,7 +35,7 @@
 }
 
 .results {
-  width: clamp(8rem, 20vw, 20rem);
+  width: 20rem;
   background: var(--greyLight-0);
   box-shadow: var(--box-shadow);
   border-radius: 1.5rem;
@@ -78,12 +78,12 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1024px) {
   .wrapper {
-    width: clamp(8rem, 50vw, 20rem);
+    width: calc(100vw - 14rem);
   }
 
   .results {
-    width: clamp(8rem, 50vw, 20rem);
+    width: calc(100vw - 14rem);
   }
 }

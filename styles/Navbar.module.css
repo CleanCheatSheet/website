@@ -1,8 +1,9 @@
 .primaryHeader {
   max-width: 1472px;
   margin-inline: auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  /* margin-top: 2rem; */
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
@@ -20,8 +21,8 @@
 }
 
 .nav {
-  width: 100%;
-  margin-right: 2rem;
+  width: calc(100% - 31rem);
+  margin-inline: 2rem;
 }
 
 .primaryNavigation {
@@ -50,7 +51,27 @@
   display: none;
 }
 
-@media (max-width: 720px) {
+.button {
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  background: var(--greyLight-0);
+  box-shadow: var(--box-shadow);
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  filter: var(--filter-hover);
+  box-shadow: var(--box-shadow-hover);
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    width: auto;
+  }
   .primaryNavigation {
     --gap: 3rem;
 
@@ -79,14 +100,18 @@
 
   .mobileNavToggle {
     display: block;
-    position: fixed;
+    position: absolute;
     z-index: 9999;
     background: none;
     border: 0;
     cursor: pointer;
-    width: 2rem;
+    width: 3rem;
     aspect-ratio: 1;
     top: 2rem;
     right: 2rem;
+  }
+
+  .mobileNavToggle[aria-expanded="true"] {
+    position: fixed;
   }
 }

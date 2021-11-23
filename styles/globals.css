@@ -36,12 +36,6 @@
   --filter-hover: brightness(1.1);
 }
 
-html,
-body,
-#__next {
-  height: 100%;
-}
-
 body {
   padding: 0;
   margin: 0;
